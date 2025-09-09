@@ -20,11 +20,26 @@ const Contact = () => {
     e.preventDefault();
     console.log("Contact form submitted:", formData);
     // Handle form submission here
+    alert("Thank you for your message! We'll get back to you within 24 hours.");
+    setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSupportAction = (action: string) => {
+    switch (action) {
+      case 'chat':
+        alert("Live chat feature coming soon! For now, please use the contact form or email us directly.");
+        break;
+      case 'help':
+        alert("Help center is under construction. Please contact us directly for assistance.");
+        break;
+      default:
+        break;
+    }
   };
 
   const contactInfo = [
@@ -217,7 +232,11 @@ const Contact = () => {
                             {option.description}
                           </p>
                         </div>
-                        <Button variant="outline" size="sm">
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleSupportAction(option.title === "Live Chat" ? "chat" : "help")}
+                        >
                           {option.buttonText}
                         </Button>
                       </div>

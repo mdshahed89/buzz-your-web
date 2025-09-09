@@ -4,6 +4,15 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, Eye, Star } from "lucide-react";
 
 const WebsiteGallery = () => {
+  const handleVisitWebsite = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleViewAllWebsites = () => {
+    // Navigate to directory page
+    window.location.href = '/directory';
+  };
+
   // Mock data - in real app this would come from Supabase
   const websites = [
     {
@@ -114,6 +123,7 @@ const WebsiteGallery = () => {
                   size="sm" 
                   variant="secondary" 
                   className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={() => handleVisitWebsite(website.url)}
                 >
                   <ExternalLink className="w-4 h-4" />
                 </Button>
@@ -140,7 +150,12 @@ const WebsiteGallery = () => {
                     {website.views.toLocaleString()} views
                   </div>
                   
-                  <Button variant="ghost" size="sm" className="text-primary hover:text-primary-foreground hover:bg-primary">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-primary hover:text-primary-foreground hover:bg-primary"
+                    onClick={() => handleVisitWebsite(website.url)}
+                  >
                     Visit Site
                   </Button>
                 </div>
@@ -150,7 +165,12 @@ const WebsiteGallery = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="border-primary/20 hover:border-primary">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="border-primary/20 hover:border-primary"
+            onClick={handleViewAllWebsites}
+          >
             View All Websites
           </Button>
         </div>

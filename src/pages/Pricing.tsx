@@ -3,8 +3,27 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Zap, Crown, Rocket } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Pricing = () => {
+  const { isAuthenticated, setShowAuthModal, setAuthModalTab } = useAuth();
+
+  const handlePlanSelect = (planName: string) => {
+    if (!isAuthenticated) {
+      setAuthModalTab('signup');
+      setShowAuthModal(true);
+    } else {
+      // Handle plan selection logic here
+      console.log(`Selected plan: ${planName}`);
+      // You could integrate with a payment processor here
+    }
+  };
+
+  const handleContactSales = () => {
+    // Navigate to contact page
+    window.location.href = '/contact';
+  };
+
   const plans = [
     {
       name: "Basic",
@@ -117,6 +136,7 @@ const Pricing = () => {
                     variant={plan.popular ? "hero" : "outline"} 
                     className="w-full mb-6"
                     size="lg"
+                    onClick={() => plan.name === "Enterprise" ? handleContactSales() : handlePlanSelect(plan.name)}
                   >
                     {plan.buttonText}
                   </Button>

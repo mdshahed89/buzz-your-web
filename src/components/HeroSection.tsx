@@ -1,8 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import heroImage from "@/assets/hero-image.jpg";
 
 const HeroSection = () => {
+  const { isAuthenticated, setShowAuthModal, setAuthModalTab } = useAuth();
+
+  const handleSubmitWebsite = () => {
+    if (!isAuthenticated) {
+      setAuthModalTab('signup');
+      setShowAuthModal(true);
+    } else {
+      // Scroll to submission form
+      const element = document.getElementById('submission-form');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleViewDirectory = () => {
+    // Navigate to directory page
+    window.location.href = '/directory';
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -40,11 +62,11 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button variant="hero" size="xl" className="group">
+          <Button variant="hero" size="xl" className="group" onClick={handleSubmitWebsite}>
             Submit Your Website
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="outline" size="xl" className="border-primary/20 hover:border-primary">
+          <Button variant="outline" size="xl" className="border-primary/20 hover:border-primary" onClick={handleViewDirectory}>
             View Directory
           </Button>
         </div>
