@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -7,27 +8,27 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Zap className="w-6 h-6 text-white" />
             </div>
             <span className="text-2xl font-bold gradient-text">PromoteHub</span>
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-foreground hover:text-primary transition-colors">
+            <Link to="/features" className="text-foreground hover:text-primary transition-colors">
               Features
-            </a>
-            <a href="#directory" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/directory" className="text-foreground hover:text-primary transition-colors">
               Directory
-            </a>
-            <a href="#pricing" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
               Pricing
-            </a>
-            <a href="#contact" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/contact" className="text-foreground hover:text-primary transition-colors">
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* CTA Buttons */}
